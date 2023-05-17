@@ -19,8 +19,15 @@ const getLocalAliases = require('./getLocalAliases');
 
 // Add process env vars. Currently used only for setting the
 // server port and the publicPath
+
+let dotenvConfigFilename = '.env.development';
+if (process.env.DEVELOPMENT_ENVIRONMENT === 'tutor') {
+  dotenvConfigFilename = '.env.tutor.development';
+} else if (process.env.DEVELOPMENT_ENVIRONMENT === 'devstack') {
+  dotenvConfigFilename = '.env.devstack.development';
+}
 dotenv.config({
-  path: path.resolve(process.cwd(), '.env.development'),
+  path: path.resolve(process.cwd(), dotenvConfigFilename),
 });
 
 // Allow private/local overrides of env vars from .env.development for config settings
@@ -172,6 +179,7 @@ module.exports = merge(commonConfig, {
   // reloading.
   devServer: {
     host: '0.0.0.0',
+    allowedHosts: 'all',
     port: process.env.PORT || 8080,
     historyApiFallback: {
       index: path.join(PUBLIC_PATH, 'index.html'),
