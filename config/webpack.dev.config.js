@@ -179,6 +179,7 @@ module.exports = merge(commonConfig, {
   // reloading.
   devServer: {
     host: '0.0.0.0',
+    allowedHosts: 'all',
     port: process.env.PORT || 8080,
     historyApiFallback: {
       index: path.join(PUBLIC_PATH, 'index.html'),
