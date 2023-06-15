@@ -180,7 +180,7 @@ module.exports = merge(commonConfig, {
   devServer: {
     host: '0.0.0.0',
     allowedHosts: 'all',
-    port: 25123,
+    port: process.env.PORT || 8080,
     historyApiFallback: {
       index: path.join(PUBLIC_PATH, 'index.html'),
       disableDotRule: true,
